@@ -1,81 +1,79 @@
-[![Release](https://github.com/fgardt/factorio-mod-template/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/fgardt/factorio-mod-template/actions/workflows/release.yml)
-<!--                           ^======[REPLACE THIS]======^                                                                          ^======[REPLACE THIS]======^  -->
+# Description
+This modpack is a curated list of quality-of-life mods that I enjoy using in Factorio.
 
-# factorio-mod-template
+# Configuration Changes
+There are some changes to existing mods default settings, if you include this modpack, be aware of these changes:
 
-A small Factorio Mod template which also contains GitHub Actions for automatic changelog generation, packaging and releasing to the [Factorio Mod Portal](https://mods.factorio.com)
+## [Bottleneck Lite](https://mods.factorio.com/mod/BottleneckLite)
+The default colors for some of the settings have been changed:
 
-# How it works
+| Configuration Setting | Sample | RGB |
+| --- | --- | --- |
+| Disabled color | ![#7F7F7F](https://placehold.co/12/7f7f7f/png?text=.) | `R 127, G 127, B 127` |
+| Insufficient input color | ![#5400FF](https://placehold.co/12/5400ff/png?text=.) | `R 84, G 0, B 255` |
+| Low power color | ![#FF00FF](https://placehold.co/12/ff00ff/png?text=.) | `R 255, G 0, B 255` |
+| No minable resources color | ![#5400FF](https://placehold.co/12/5400ff/png?text=.) | `R 84, G 0, B 255` |
+| No power color | ![ff7f00](https://placehold.co/12/ff7f00/png?text=.) | `R 255, G 127, B 0` |
 
-This template uses [semantic-release](https://github.com/semantic-release/semantic-release) to automate the changelog generation aswell as packaging and releasing of the mod. \
-To achieve this it analyzes your commit messages to figure out what the new version should be and what to put into the changelog.
-Packaging and releasing to the factorio mod portal is done with [this plugin](https://github.com/fgardt/semantic-release-factorio). \
-Additionally the GitHub Action will also create a release in your repository on GitHub itself.
+## [Thicker Power Wires](https://mods.factorio.com/mod/ThickerLines)
+The following settings now default to **Disabled**:
 
-Once you push new commits to the main branch the release action will trigger. \
-First it will analyze all commits since the last release (determined from the last tag) to figure out if a new version should be released and what version it should be. \
-To make this possible you need to follow a commit message convention. The default convention this template uses is [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with the following types:
+* Thicker power wires
+* Thicker wire shadows
 
-| Commit type                 | Changelog section |
-| --------------------------- | ----------------- |
-| `feat` or `feature`         | `Features`        |
-| `fix`                       | `Bugfixes`        |
-| `perf` or `performance`     | `Optimizations`   |
-| `compat` or `compatibility` | `Compatibility`   |
-| `balance`                   | `Balancing`       |
-| `graphics`                  | `Graphics`        |
-| `sound`                     | `Sounds`          |
-| `gui`                       | `Gui`             |
-| `info`                      | `Info`            |
-| `locale`                    | `Locale`          |
-| `translate`                 | `Translation`     |
-| `control`                   | `Control`         |
-| `other`                     | `Changes`         |
+# Mod list
 
-Because a push to the main branch triggers the release action it is recommended to work on a separate branch until your work is done and then merge that branch into main to release it. \
-_Or you just work locally and if you want to release you push your changes to main, up to you how you want to do it ;)_
-
-# How to use
-
-## Repository setup
-
-Click the `Use this template` button and create your own repository.
-
-Once you have your new repository you need to add a Factorio token as a GitHub Actions secret so that the mod releasing can work. \
-To get the token go to [Factorio's website](https://factorio.com/login) and login with your account. \
-Then you need to go to your [profile](https://factorio.com/profile) and generate a new API key. \
-The API key needs `Upload Mods`, `Publish Mods` and `Edit Mods` permissions. Copy the generated key.
-
-Now you need to go to your repository settings > `Secrets and variables` > `Actions` and add a new Repository secret called `FACTORIO_TOKEN` with your copied key as the secret.
-
-## Mod setup
-
-- Swap out the [`LICENSE`](LICENSE) to your own liking _**(especially change out my name for yours)**_
-- Populate the [`info.json`](info.json) file with correct values _(the `version` field gets updated automatically)_
-- Add the corresponding text into [`locale.cfg`](locale/en/locale.cfg)
-- Add a `thumbnail.png` to the root of the repository _([ideally 144x144px](https://wiki.factorio.com/Tutorial:Mod_structure#Files))_
-
-# Misc
-
-## How the packaging works
-
-The [`semantic-release-factorio` plugin](https://github.com/fgardt/semantic-release-factorio) uses the `git archive` command to package the mod. \
-That way you can specify what folders / files to exclude from your packaged mod by specifying them in [`.gitattributes`](.gitattributes).
-
-If you want to locally test packaging of your mod you can run the following command:
-```sh
-git archive --format zip --prefix [YOUR-MOD-NAME]/ --worktree-attributes --output [YOUR-MOD-NAME]_[VERSION].zip HEAD
-```
-
-## Changing the commit message convention
-
-If you want to change the commit message convention you can do so by changing the 2 `preset` fields in the [`.releaserc.json`](.releaserc.json) file. \
-Possible presets are: [`angular`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular), [`atom`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-atom), [`codemirror`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-codemirror), [`ember`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-ember), [`eslint`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint), [`express`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-express), [`jquery`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-jquery), [`jshint`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-jshint), [`conventionalcommits`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits).
-
-Additionally you also need to modify the worflow file [`.github/workflows/release.yml`](.github/workflows/release.yml) to use the package that corresponds to your chosen preset. \
-Replace `conventional-changelog-conventionalcommits` with `conventional-changelog-[YOUR PRESET]` accordingly.
-
-## Need help?
-
-Checkout the [official Factorio Discord](https://discord.gg/factorio) and check the pins in the `#mod-making` channel. \
-There is also the [Lua API documentation](https://lua-api.factorio.com/latest/) and the [modding section in the wiki](https://wiki.factorio.com/Modding).
+* [Ammo Alerts](https://mods.factorio.com/mod/Gun_Turret_Alerts)
+* [Artisanal Reskins: Compatibility](https://mods.factorio.com/mod/reskins-compatibility)
+* [Auto Deconstruct](https://mods.factorio.com/mod/AutoDeconstruct)
+* [Auto Deconstruct Loot, Reconstructed](https://mods.factorio.com/mod/auto_deconstruct_loot_reconstructed)
+* [Auto Trash](https://mods.factorio.com/mod/AutoTrash)
+* [Automatic Station Painter](https://mods.factorio.com/mod/automatic-station-painter)
+* [Automatic Train Painter](https://mods.factorio.com/mod/Automatic_Train_Painter)
+* [Belt Reverser](https://mods.factorio.com/mod/belt-reverserup)
+* [Blueprint Tools](https://mods.factorio.com/mod/BlueprintTools)
+* [Bottleneck Lite](https://mods.factorio.com/mod/BottleneckLite)
+* [Bullet Trails](https://mods.factorio.com/mod/bullet-trails)
+* [Calculator UI](https://mods.factorio.com/mod/calculator-ui)
+* [Chest Auto Sort](https://mods.factorio.com/mod/chest-auto-sort)
+* [Cleaned Concrete](https://mods.factorio.com/mod/CleanedConcrete)
+* [Clock](https://mods.factorio.com/mod/clock)
+* [Damage Numbers](https://mods.factorio.com/mod/damage-numbers)
+* [Display Plates - Ground Signs & Map Markers](https://mods.factorio.com/mod/DisplayPlates)
+* [Even More Text Plates](https://mods.factorio.com/mod/EvenMoreTextPlates)
+* [Factory Inspector](https://mods.factorio.com/mod/factory-inspector)
+* [Factory Planner](https://mods.factorio.com/mod/factoryplanner)
+* [Factory Search](https://mods.factorio.com/mod/FactorySearch)
+* [Ghost Warnings](https://mods.factorio.com/mod/GhostWarnings)
+* [GUI Unifyer](https://mods.factorio.com/mod/GUI_Unifyer)
+* [LTN/Cybersyn - TCS Refuel Compatibility Mod](https://mods.factorio.com/mod/LTN-TCS-Refuel)
+* [Milestones](https://mods.factorio.com/mod/Milestones)
+* [Mining patch planner](https://mods.factorio.com/mod/mining-patch-planner)
+* [Module Inserter](https://mods.factorio.com/mod/ModuleInserter)
+* [Picker Belt Tools](https://mods.factorio.com/mod/PickerBeltTools)
+* [Picker Dollies](https://mods.factorio.com/mod/PickerDollies)
+* [Picker Extended Version](https://mods.factorio.com/mod/PickerExtended)
+* [Pipe Visualizer](https://mods.factorio.com/mod/PipeVisualizer)
+* [Puppy's Vehicle Fuel UI](https://mods.factorio.com/mod/puppy-vehicle-fuel-ui)
+* [Rate Calculator](https://mods.factorio.com/mod/RateCalculator)
+* [Realistic Decoration Cleanup](https://mods.factorio.com/mod/RealisticDecorationCleanup)
+* [Recipe Book](https://mods.factorio.com/mod/RecipeBook)
+* [Remote Configuration](https://mods.factorio.com/mod/RemoteConfiguration)
+* [Remote Requests](https://mods.factorio.com/mod/remote-requests)
+* [Resource Highlighter (Dark's Version)](https://mods.factorio.com/mod/resourcehighlighter-dark)
+* [Solar Calculator](https://mods.factorio.com/mod/solar-calc)
+* [Stats GUI](https://mods.factorio.com/mod/StatsGui)
+* [Tapeline](https://mods.factorio.com/mod/Tapeline)
+* [Task List](https://mods.factorio.com/mod/TaskList)
+* [Text Plates](https://mods.factorio.com/mod/textplates)
+* [Thicker Power Wires](https://mods.factorio.com/mod/ThickerLines)
+* [Tinted Ghosts](https://mods.factorio.com/mod/TintedGhosts)
+* [Todo List](https://mods.factorio.com/mod/Todo-List)
+* [Train Control Signals](https://mods.factorio.com/mod/Train_Control_Signals)
+* [Train Log](https://mods.factorio.com/mod/train-log)
+* [Train Mode Switcher](https://mods.factorio.com/mod/TrainModeSwitcher)
+* [Ultimate Research Queue](https://mods.factorio.com/mod/UltimateResearchQueue)
+* [Underground Indicators](https://mods.factorio.com/mod/UndergroundIndicators)
+* [VehicleSnap](https://mods.factorio.com/mod/VehicleSnap)
+* [Well Planner (with bzgas support)](https://mods.factorio.com/mod/WellPlanner_bzgas_fixed)
+* [YARM - Resource Monitor](https://mods.factorio.com/mod/YARM)
