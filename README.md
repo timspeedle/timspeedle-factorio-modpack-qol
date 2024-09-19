@@ -75,5 +75,5 @@ The following settings now default to **Disabled**:
 * [Ultimate Research Queue](https://mods.factorio.com/mod/UltimateResearchQueue)
 * [Underground Indicators](https://mods.factorio.com/mod/UndergroundIndicators)
 * [VehicleSnap](https://mods.factorio.com/mod/VehicleSnap)
-* [Well Planner (with bzgas support)](https://mods.factorio.com/mod/WellPlanner_bzgas_fixed)
+* [Well Planner](https://mods.factorio.com/mod/WellPlanner)
 * [YARM - Resource Monitor](https://mods.factorio.com/mod/YARM)

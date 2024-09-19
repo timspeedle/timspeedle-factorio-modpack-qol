@@ -61,7 +61,7 @@
     "UltimateResearchQueue >= 1.0.12",
     "UndergroundIndicators >= 1.1.1",
     "VehicleSnap >= 1.18.5",
-    "WellPlanner_bzgas_fixed >= 1.0.0",
+    "WellPlanner >= 1.1.6",
     "YARM >= 0.10.14"
   ]
 }
