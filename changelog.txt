@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.0
+Date: 2024-09-19
+  Features:
+    - migrated to https://github.com/fgardt/factorio-mod-template for deployments
+  Bugfixes:
+    - Replace reference to deprecated WellPlanner_bzgas_fixed to WellPlanner
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2023-12-27
   Mods added:
